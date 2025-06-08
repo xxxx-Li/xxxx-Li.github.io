@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+<!-- keywords -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="譯鋒">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="譯鋒">
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    <meta name="description" content="">
+    <meta name="description" content="目前所有的例子都是遵循最简单的程序设计结构——顺序结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.1：分支结构">
+<meta property="og:url" content="http://example.com/2023/08/28/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2-1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="譯鋒說">
+<meta property="og:description" content="目前所有的例子都是遵循最简单的程序设计结构——顺序结构">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/1.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/3.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/4.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/5.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/6.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/7.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/8.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/9.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/10.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/11.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/12.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/13.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/14.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/15.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/16.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/17.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/18.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/19.png">
+<meta property="article:published_time" content="2023-08-28T12:57:37.000Z">
+<meta property="article:modified_time" content="2023-08-28T12:57:37.000Z">
+<meta property="article:author" content="譯鋒">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/1.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    <title>2.1：分支结构 · 譯鋒說</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .footer-fixed-btn,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #444 0,
+            #444 80px,
+            #333 80px,
+            #333 160px
+        );
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link id="stylesheet-fancybox" rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-base" rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-mobile" rel="preload" href="/css/mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='screen and (max-width: 960px)'">
+    <link id="stylesheet-theme-dark" rel="preload" href="/css/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    <!-- 百度统计  -->
+    <!-- 谷歌统计  -->
+    <!-- Google tag (gtag.js) -->
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="譯鋒說" type="application/atom+xml">
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+        <body class="post-body">
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        <div class="header-sidebar-menu">
+            <div style="padding-left: 1px;">&#xe775;</div>
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href="/">譯鋒說</a>
+        </span>
+    </div>
+    <!-- toggle banner -->
+    <div class="banner">
+        <div class="blog-title header-element">
+            <a href="/">譯鋒說</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">2.1：分支结构</a>
+        </div>
+    </div>
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- donate button -->
+
+    <!-- back to top button -->
+    <div class="footer-fixed-btn footer-fixed-btn--hidden back-top">
+        <div>&#xe639;</div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="    height:50vh;
+">
+    <!-- 主页  -->
+    <!-- 404页  -->
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+                2.1：分支结构
+            <!-- 404 -->
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            <!-- 404 -->
+        </p>
+        <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="C#">C#</a>
+</div>
+
+                <!-- 文章字数统计 -->
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">5k</span>阅读时长: <span class="post-count reading-time">20 min</span></span>
+                    </div>
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2023/08/28</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>目前所有的例子都是遵循最简单的程序设计结构——顺序结构</p>
+<span id="more"></span>
+
+<p>&ensp;&emsp;目前所有的例子都是遵循最简单的程序设计结构——顺序结构，也就是所谓的“一条路走到黑”，<b><span style="color:#f0768b;">程序所做的事情就是从上到下依次执行每一条语句</span></b>。<br>&ensp;&emsp;但现实中，我们的程序常常需要进行判断和选择。比如，判断用户的年龄是否满18周岁？判断用户的性别是否为女生？判断用户输入的年份是否为闰年？这些都是需要让程序进行判断和选择的，称为<b><span style="color:#f0768b;">分支结构程序设计</span></b></p>
+<h2 id="2-1-1-关系运算符"><a href="#2-1-1-关系运算符" class="headerlink" title="2.1.1 关系运算符"></a>2.1.1 关系运算符</h2><p>在C语言中，使用关系运算符来比较两个数的大小关系，如图2-1所示<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/1.png"></p>
+<p>&ensp;&emsp;关系运算符都是双目运算符，其结合性均为从左到右。<br>&ensp;&emsp;值得注意的是，关系运算符的优先级低于算术运算符，高于赋值运算符。另外，图2-1中的这6个关系运算符，<code>&lt;、&lt;=、&gt;、&gt;=</code>的优先级相同，高于<code>==</code>和<code>!=</code>（<code>==</code>和<code>!=</code>的优先级相同）</p>
+<h2 id="2-1-2-关系表达式"><a href="#2-1-2-关系表达式" class="headerlink" title="2.1.2 关系表达式"></a>2.1.2 关系表达式</h2><p>&ensp;&emsp;使用关系运算符将两边的变量、数据或表达式连接起来，称为<b><span style="color:#f0768b;">关系表达式</span></b>。下面是一些关系表达式的例子：</p>
+<ul>
+<li><code>1&lt;2</code></li>
+<li><code>a&gt;b</code></li>
+<li><code>a&lt;=1+b</code></li>
+<li><code>&#39;a&#39;+&#39;b&#39;&lt;=&#39;c&#39;</code></li>
+<li><code>(a=3)&gt;(b=5)</code></li>
+</ul>
+<p>&ensp;&emsp;关系表达式得到的值是一个逻辑值，即判断结果为“真”或“假”，关系表达式的值为<code>0</code>.<br>&ensp;&emsp;下面两个例子：</p>
+<ul>
+<li>关系表达式<code>1&lt;2</code>的值为真，所以该关系表达式的值为<code>1</code></li>
+<li>关系表达式<code>&#39;a&#39;+&#39;b&#39;&lt;=&#39;c&#39;</code>，因为字符<code>&#39;a&#39;、&#39;b&#39;、&#39;c&#39;</code>对应的<code>ASCII</code>码分别是<code>97、98、99</code>，值为假，所以该表达式的值为<code>0</code>.</li>
+</ul>
+<p>&ensp;&emsp;即<code>97+98&lt;=99</code>，值为假，所以该表达式的值为<code>0</code><br>&ensp;&emsp;请看下面例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> a = <span class="number">5</span>, b = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="number">1</span> &lt; <span class="number">2</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, a &gt; b);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, a &lt;= <span class="number">1</span> + b);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="string">&#x27;a&#x27;</span> + <span class="string">&#x27;b&#x27;</span> &lt;= <span class="string">&#x27;c&#x27;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, (a = <span class="number">3</span>) &gt; (b = <span class="number">5</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/3.png"></p>
+<h2 id="2-1-3-逻辑运算符"><a href="#2-1-3-逻辑运算符" class="headerlink" title="2.1.3 逻辑运算符"></a>2.1.3 逻辑运算符</h2><p>&ensp;&emsp;关系运算符获得的一个逻辑值，逻辑值只有“真”或“假”，没有什么“可能”“也许”“大概”等模棱两可的东西。<br>&ensp;&emsp;在C语言中，<b><span style="color:#6a5acd;">如果需要同时对两个或两个以上的关系表达式进行判断，那么就需要用到逻辑运算符</span></b>。<br>&ensp;&emsp;比如，一个程序限定条件只能由年满18周岁的女生使用，那么用户想要使用这个程序就必须满足以下两个条件：</p>
+<ul>
+<li>年满18周岁；</li>
+<li>女性；</li>
+</ul>
+<p>&ensp;&emsp;C语言提供了三种逻辑运算符，见表2-1<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/4.png"></p>
+<p>&ensp;&emsp;注意：逻辑运算符的优先级是不一样的，作为单目运算符的逻辑非（<code>!</code>）优先级最高，接下来是逻辑与（<code>&amp;&amp;</code>），最后才是逻辑或（<code>||</code>）</p>
+<h2 id="2-1-4-逻辑表达式"><a href="#2-1-4-逻辑表达式" class="headerlink" title="2.1.4 逻辑表达式"></a>2.1.4 逻辑表达式</h2><p>&ensp;&emsp;用逻辑运算符将两边的变量、数据或表达式连接起来，称为逻辑表达式，下面是一些逻辑表达式的例子：</p>
+<ul>
+<li><code>3 &gt; 1 &amp;&amp; 1 &lt; 2</code></li>
+<li><code>3 + 1 || 2 == 0</code></li>
+<li><code>!(a+b)</code></li>
+<li><code>!0 + 1 &lt; 1 || !(3 + 4)</code></li>
+<li><code>&#39;a&#39; - &#39;b&#39; &amp;&amp; &#39;c&#39;</code></li>
+</ul>
+<p>1）<code>3 &gt; 1 &amp;&amp; 1 &lt; 2</code><br>&ensp;&emsp;由于关系运算符的优先级比逻辑运算符高，所以先运算两个关系运算符，变成 <code>1 &amp;&amp; 1</code>，结果为 <code>1</code>.<br>2）<code>3 + 1 || 2 == 0</code><br>&ensp;&emsp;有的朋友看到这里就懵了！不是说逻辑运算符的左右两边只能是逻辑值吗？逻辑值不是只能是真或假，用<code>1</code>和<code>0</code>来表示吗？<br>&ensp;&emsp;其实是这样的，关系表达式和逻辑表达式得到的值都是一个逻辑值，也就是表示真的<code>1</code>和表示假的<code>0</code>。但是当判断一个值得逻辑值的时候，以<code>0</code>表示假，以任何非<code>0</code>的数表示真。一个是编译系统告诉我们的结果，一个是让编译系统去判断，两者方向不同。因此<code>3+1=4</code>，为非<code>0</code>值，所以逻辑或的左边为真，右边<code>2==0</code>明显是不成立的，右边为假，但对于逻辑或来说，只要存在一个为真，结果就为真。<br>3）<code>!(a+b)</code><br>&ensp;&emsp;这里有个小括号，根据优先级规则先计算小括号里面的内容。也就是将变量<code>a</code>的值和变量<code>b</code>的值相加，如果他们的和为<code>0</code>，那么逻辑非的结果就是真；如果它们的和不为<code>0</code>，那么逻辑非的结果则是假。<br>4）<code>!0 + 1 &lt; 1 || !(3 + 4)</code><br>&ensp;&emsp;<code>0</code>的逻辑非结果为真，也就是<code>1</code>，<code>1 + 1 &lt; 1 </code>明显是不成立的，所以逻辑或的左边为假，右边 <code>3 + 4</code> 的值是<code>7</code>，非<code>0</code>，所以逻辑非的结果是假。逻辑或的左右两边均为假，则结果为假。<br>5）<code>&#39;a&#39; - &#39;b&#39; &amp;&amp; &#39;c&#39;</code><br>&ensp;&emsp;在编译器的“眼中”所有的字符对应的都是<code>ASCII</code>码，因为字符<code>&#39;a&#39;、&#39;b&#39;、&#39;c&#39;</code>对应的<code>ASCII</code>码分别是<code>97、98、99</code>，所以逻辑与左边<code>97-98</code>的值为非<code>0</code>，表示真，右边<code>99</code>也是非<code>0</code>，也表示真，因此结果为真。<br>&ensp;&emsp;下面用程序验证上述结论：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> a = <span class="number">5</span>, b = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="number">3</span> &gt; <span class="number">1</span> &amp;&amp; <span class="number">1</span> &lt; <span class="number">2</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="number">3</span> + <span class="number">1</span> || <span class="number">2</span> == <span class="number">0</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, !(a + b));</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, !<span class="number">0</span> + <span class="number">1</span> &lt; <span class="number">1</span> || !(<span class="number">3</span> + <span class="number">4</span>));</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="string">&#x27;a&#x27;</span> - <span class="string">&#x27;b&#x27;</span> &amp;&amp; <span class="string">&#x27;c&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/5.png"></p>
+<h2 id="2-1-5-短路求值"><a href="#2-1-5-短路求值" class="headerlink" title="2.1.5 短路求值"></a>2.1.5 短路求值</h2><p>&ensp;&emsp;短路求值（short-circuit evaluation）又称最小化求值，是一种逻辑运算符的求值策略。<br>&ensp;&emsp;运算符的求值策略。只有当第一个运算数的值无法确定逻辑运算的结果时，才对第二个运算数进行求值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">        (a = <span class="number">0</span>) &amp;&amp; (b = <span class="number">5</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;a = %d, b = %d\n&quot;</span>, a, b);</span><br><span class="line"></span><br><span class="line">        (a = <span class="number">1</span>) || (b = <span class="number">5</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;a = %d, b = %d\n&quot;</span>, a, b);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/6.png"></p>
+<p>&ensp;&emsp;第一个逻辑表达式：因为<code>a</code>先被赋值为<code>0</code>，则逻辑与左边为假，所以根据短路求值的原则，右边无须再进行计算（<code>b</code>变量的值没有被改变），直接得到该逻辑表达式的值为假，也就是<code>0</code>。<br>&ensp;&emsp;第二个逻辑表达式：因为<code>a</code>先被赋值为<code>1</code>，则逻辑或左边为真，所以根据短路求值的原则，右边无须再进行计算（<code>b</code>变量的值没有被改变），直接得到逻辑表达式的值为真，也就是<code>1</code>。</p>
+<h2 id="2-1-6-if语句"><a href="#2-1-6-if语句" class="headerlink" title="2.1.6 if语句"></a>2.1.6 if语句</h2><p>&ensp;&emsp;分支结构的作用就是让C语言的代码根据条件执行不同的语句或程序块，但光有关系表达式和逻辑表达式还不足以实现，实现分支结构还需要学习一个新的语句——<code>if语句</code>。<br>&ensp;&emsp;if语句的实现有三种形式：</p>
+<h3 id="1-第一种"><a href="#1-第一种" class="headerlink" title="1.第一种"></a>1.第一种</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (表达式)</span><br><span class="line">&#123;</span><br><span class="line">    … <span class="comment">//逻辑值为真所执行的语句、程序块</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;第一种<code>if语句</code>最简单的，if后边小括号内填写返回逻辑值的表达式，当然也可以直接填入一个逻辑值，当填入的这个值为非<code>0</code>的时候，编译系统会认为这个逻辑值是真；只有当填入<code>0</code>的时候，才被认为是假。<br>&ensp;&emsp;下面例子演示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;您老贵更：&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;i);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">18</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;进门左拐！\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/7.png"></p>
+<p>&ensp;&emsp;程序运行后，如果输入的值大于等于<code>18</code>，即if后边小括号内的表达式的值为<code>真</code>，那么执行<code>if语句</code>的内容；如果输入的值是<code>16</code>，即表达式的值为<code>假</code>，if语句的内容则不被执行。<br>&ensp;&emsp;上面例子中属于<code>if语句</code>的内容是用大括号括起来的，并且做了缩紧。但是乐于尝试就可能会发现下面代码也同样可执行：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;您老贵庚：&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;i);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">18</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;进门左拐！\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/8.png"></p>
+<p>&ensp;&emsp;上面的代码可以正常执行，是因为C语言不会强制要求代码一定要写的很规范，但是适当的缩进可以让我们的代码一目了然。<br>&ensp;&emsp;在C语言中，使用分号（<code>;</code>）结束一个语句。在表达式后边接一个分号，就变成了一个完整的C语言语句。如果使用大括号将几个语句包括起来，那么这几个语句就构成了程序块。一个程序块在编译系统看来，就是一个整体。<br>&ensp;&emsp;那么什么时候需要将几个语句变成一个整体呢？<br>&ensp;&emsp;比如，希望<code>if</code>后边的表达式为<code>真</code>的时候，执行几个语句，那么就需要用大括号将它们包括起来：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;您老贵庚：&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;i);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">18</span>)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;进门左拐！\n&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;balabalabala\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/9.png"></p>
+<p><b><span style="color:#f0768b;">第一种if语句表达出来的意思是“如果条件成立，就……”。</span></b></p>
+<h3 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h3><p>接下来是第二种if语句，它表达出来的意思是<b><span style="color:#f0768b;">“如果条件成立，就……；否则就……”。</span></b></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (表达式)</span><br><span class="line">&#123;</span><br><span class="line">    … <span class="comment">//逻辑值为真所执行的语句、程序块</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    … <span class="comment">//逻辑值为假所执行的语句、程序块</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;请看下面例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;您老贵庚：&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;i);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">18</span>)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;进门左拐！\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;慢走不送！\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/10.png"></p>
+<h3 id="第三种"><a href="#第三种" class="headerlink" title="第三种"></a>第三种</h3><p>&ensp;&emsp;<code>if语句</code>形式允许扩充各种条件的判断，语法格式是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (表达式<span class="number">1</span>) &#123;···&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (表达式<span class="number">2</span>) &#123;···&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (表达式<span class="number">3</span>) &#123;···&#125;</span><br><span class="line">  …</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (表达式n) &#123;···&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;···&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;下面这个小程序实现的功能是按成绩评级：</p>
+<ul>
+<li>90分及以上：A</li>
+<li>80~89分：B</li>
+<li>70～70分：C</li>
+<li>60～69分：D</li>
+<li>低于60分：E</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;請輸入成績：&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;i);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">90</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;A\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (i &gt;= <span class="number">80</span> &amp;&amp; i &lt; <span class="number">90</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;B\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (i &gt;= <span class="number">70</span> &amp;&amp; i &lt; <span class="number">80</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;C\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (i &gt;= <span class="number">60</span> &amp;&amp; i &lt; <span class="number">70</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;D\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;E\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/11.png"></p>
+<h2 id="2-1-7-switch-语句"><a href="#2-1-7-switch-语句" class="headerlink" title="2.1.7 switch 语句"></a>2.1.7 switch 语句</h2><p>&ensp;&emsp;C语言还提供了另外一种多分支选择的语句——<code>switch语句</code>，语法格式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (表达式)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> 常量表达式<span class="number">1</span>：语句或程序块</span><br><span class="line">    <span class="keyword">case</span> 常量表达式<span class="number">2</span>：语句或程序块</span><br><span class="line">    ……</span><br><span class="line">    <span class="keyword">case</span> 常量表达式n：语句或程序块</span><br><span class="line">    <span class="keyword">default</span>:语句或程序块</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;这里每个<code>case</code>后边的常量是匹配<code>switch</code>后边表达式的值，如果表达式计算出来的值与常量表达式2的值相等，那么直接跳到<code>case</code> 常量表达式2的位置开始执行，如果上边所有的<code>case</code>均没有匹配，那么就执行<code>default</code>后面的内容。但是<code>default</code>是可选的，如果没有<code>default</code>，并且上边所有的<code>case</code>均不匹配，那么<code>switch</code>语句不执行任何动作。<br>&ensp;&emsp;从语法结构上来看，<code>switch语句</code>比<code>if-else-if</code>更为简洁。现在尝试使用<code>switch</code>语句代替<code>if-else-if</code>语句，写一个通过评级反推出分数范围的程序。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">char</span> ch;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;請輸入成績：&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;ch);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (ch)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;A&#x27;</span>: <span class="built_in">printf</span>(<span class="string">&quot;您的成績在90分以上！\n&quot;</span>);</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;B&#x27;</span>: <span class="built_in">printf</span>(<span class="string">&quot;您的成績在80~89分！\n&quot;</span>);</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;C&#x27;</span>: <span class="built_in">printf</span>(<span class="string">&quot;您的成績在70~79分！\n&quot;</span>);</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;D&#x27;</span>: <span class="built_in">printf</span>(<span class="string">&quot;您的成績在60~69分！\n&quot;</span>);</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;E&#x27;</span>: <span class="built_in">printf</span>(<span class="string">&quot;您的成績在60分以下！\n&quot;</span>);</span><br><span class="line">                <span class="keyword">default</span>: <span class="built_in">printf</span>(<span class="string">&quot;請輸入有效的成績評級！\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/12.png"></p>
+<p>&ensp;&emsp;这并不是我们想要的结果，那么问题出现在哪里呢<br>&ensp;&emsp;问题就出在C语言并没有我们想象的那么“智能”，这些<code>case</code>和<code>default</code>，它们事实上都是“标签”，用来标志一个位置而已。<code>switch</code>跳到某个位置之后，就会一直往下执行，所以这里还需要配合一个<code>break语句</code>，让代码在适当的位置跳出<code>switch语句</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (表达式)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> 常量表达式<span class="number">1</span>：语句或程序块; <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> 常量表达式<span class="number">2</span>：语句或程序块; <span class="keyword">break</span>;</span><br><span class="line">    ……</span><br><span class="line">    <span class="keyword">case</span> 常量表达式n：语句或程序块; <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:语句或程序块n+<span class="number">1</span>; <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;当程序执行到<code>break语句</code>的时候就不会再继续往下走了，它会跳出<code>switch语句</code>并开始执行下一条语句。将代码修改如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">char</span> ch;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;請輸入成績：&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;ch);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (ch)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;A&#x27;</span>: <span class="built_in">printf</span>(<span class="string">&quot;您的成績在90分以上！\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;B&#x27;</span>: <span class="built_in">printf</span>(<span class="string">&quot;您的成績在80~89分！\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;C&#x27;</span>: <span class="built_in">printf</span>(<span class="string">&quot;您的成績在70~79分！\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;D&#x27;</span>: <span class="built_in">printf</span>(<span class="string">&quot;您的成績在60~69分！\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;E&#x27;</span>: <span class="built_in">printf</span>(<span class="string">&quot;您的成績在60分以下！\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>: <span class="built_in">printf</span>(<span class="string">&quot;請輸入有效的成績評級！\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/13.png"></p>
+<h2 id="2-1-8-分支结构的嵌套"><a href="#2-1-8-分支结构的嵌套" class="headerlink" title="2.1.8 分支结构的嵌套"></a>2.1.8 分支结构的嵌套</h2><p>&ensp;&emsp;如果在一个if语句中包含另一个if语句，就称为if语句的嵌套，也叫做分支结构的嵌套，如图2-3所示。<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/14.png"></p>
+<p>&ensp;&emsp;下面根据图2-4所示的流程图编写代码<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/15.png"></p>
+<p>流程图是算法、工作流或流程的一种框图表示，它以不同类型的框代表不同种类的步骤，每两个步骤之间以箭头连接。这种表示方法便于说明解决已知问题的方法，广泛应用于分析、设计、记录及操控许多领域的流程或程序。</p>
+<p>&ensp;&emsp;程序代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> a, b;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;請輸入來兩個數字：&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (a != b)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">if</span> (a &gt; b)</span><br><span class="line">                &#123;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;%d &gt; %d\n&quot;</span>, a, b);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;%d &lt; %d\n&quot;</span>, a, b);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d = %d\n&quot;</span>, a, b);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/16.png"></p>
+<h2 id="2-1-9-悬挂-else"><a href="#2-1-9-悬挂-else" class="headerlink" title="2.1.9  悬挂 else"></a>2.1.9  悬挂 else</h2><p>&ensp;&emsp;何为<code>悬挂else</code>。比如，你计划约同学周末一起去看电影，接下来就有两个问题了：第一，同学那天有没有空；第二，天气是否下雨。但主要还是看问题一，只要同学有空，下雨可以带伞。<br>&ensp;&emsp;写成代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">char</span> isRain, isFree;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;是否有空？（Y/N）&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;isFree);</span><br><span class="line"></span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;是否下雨？（Y/N）&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;isRain);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (isFree == <span class="string">&#x27;Y&#x27;</span> || isFree == <span class="string">&#x27;y&#x27;</span>)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (isRain == <span class="string">&#x27;Y&#x27;</span> || isRain == <span class="string">&#x27;y&#x27;</span>)</span><br><span class="line"></span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;記得帶傘！\n&quot;</span>);</span><br><span class="line">                </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;同學沒空！\n&quot;</span>);</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/17.png"></p>
+<p>&ensp;&emsp;这样看上去似乎没什么问题，但如果这样输入：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/18.png"></p>
+<p>&ensp;&emsp;这里同学处于有空状态但是居然输出“同学没空！”，这是为什么呢？<br>&ensp;&emsp;分析代码：这段代码本意应该有两种情况，同学有空或没空。对于同学有空的情况，如果天下雨，就提醒带伞；对于同学没空的情况，就很遗憾了。然而，这段代码实际上所做的并非如此，原因在于C语言中有这样的规则：<code>else</code>始终与最接近的<code>if</code>匹配，所以都被程序的缩紧骗了，事实上编译器看到程序的代码是这样的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">if</span> (isFree == <span class="string">&#x27;Y&#x27;</span> || isFree == <span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> (isRain == <span class="string">&#x27;Y&#x27;</span> || isRain == <span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;及的帶傘！\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                 <span class="built_in">printf</span>(<span class="string">&quot;同學沒空！\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;解决方法很简单，加上一个大括号（<code>&#123;&#125;</code>）即可：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">if</span> (isFree == <span class="string">&#x27;Y&#x27;</span> || isFree == <span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> (isRain == <span class="string">&#x27;Y&#x27;</span> || isRain == <span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;及的帶傘！\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;同學沒空！\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;所以，最好的习惯就是<code>if-else</code>语句后面，无论是一个还是多个语句，都使用大括号把他们括起来，只要养成这样的习惯，就可以防止发生类似<code>悬挂else</code>这样的问题。<br>&ensp;&emsp;代码像下面这样写会更好些：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">char</span> isRain, isFree;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;是否有空？（Y/N）&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;isFree);</span><br><span class="line"></span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;是否下雨？（Y/N）&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;isRain);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (isFree == <span class="string">&#x27;Y&#x27;</span> || isFree == <span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">        &#123;       </span><br><span class="line">                <span class="keyword">if</span> (isRain == <span class="string">&#x27;Y&#x27;</span> || isRain == <span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;及的帶傘！\n&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;同學沒空！\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;无论是哪种写法，选择后都要坚持一直使用它，不要换来换去，不然自己写的代码过段时间自己看着都别扭。</p>
+<h2 id="2-1-10-等于号带来的问题"><a href="#2-1-10-等于号带来的问题" class="headerlink" title="2.1.10 等于号带来的问题"></a>2.1.10 等于号带来的问题</h2><p>&ensp;&emsp;分支结构的代码容易陷入另一个陷阱，那就是等于号带来的问题。作为条件的关系表达式中，经常需要判断一个值是否与另一个值相等。继续刚才的故事，比如看完电影，你就要判断同学是否需要回家了，代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;       </span><br><span class="line">        <span class="type">char</span> hasBF;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;是否回家？&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;hasBF);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (hasBF = <span class="string">&#x27;Y&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;送他回家\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;那就去玩！\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;正当同学对你say no （<code>N</code>）的时候，程序打印出来的却是：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2.1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/19.png"></p>
+<p>&ensp;&emsp;问题出在等于号（<code>=</code>），<code>if (hasBF = &#39;Y&#39;)</code>本意是判断<code>hasBF</code>变量的值是否等于<code>&#39;Y&#39;</code>，结果由于少写了一个等于号，就变成了赋值表达式。所以无论<code>hasBF</code>里边存放的值是什么，在这里都被赋值为<code>&#39;Y&#39;</code>。<br>&ensp;&emsp;如果代码变得庞大，那么从奇怪的结果中要反推出问题所在，就变得异常困难。<br>&ensp;&emsp;解决办法：只需要将两个操作数调一下位置即可。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">if</span> (<span class="string">&#x27;Y&#x27;</span> == hasBF)</span><br><span class="line">&#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;送他回家\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;那就去玩！\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;将值写在表达式的左边，将变量写在表达式的右边。这样做的好处是让编译器帮你做检查。因为如果少录入一个等于号，“<code>&#39;Y&#39; = hasBF</code>”这个表达式是不成立的，因为编译器永远不会允许给一个常量赋值。</p>
+
+    </article>
+    <!-- license -->
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://example.com">譯鋒</a>
+            <p>原文链接：<a href="http://example.com/2023/08/28/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2-1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/">http://example.com/2023/08/28/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2-1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/</a>
+            <p>发表日期：<a href="http://example.com/2023/08/28/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2-1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/">August 28th 2023, 8:57:37 pm</a>
+            <p>更新日期：<a href="http://example.com/2023/08/28/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2-1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/">August 28th 2023, 8:57:37 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2023/09/14/%E9%AB%98%E6%95%B0/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-3%EF%BC%9A%E6%B1%82%E6%8A%BD%E8%B1%A1%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%9F%9F/" title="1.3：求抽象函数的定义域">
+                    <div class="nextTitle">1.3：求抽象函数的定义域</div>
+                </a>
+        </li>
+        <li class="previous">
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2023/08/27/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/" title="1.17：运算符">
+                    <div class="prevTitle">1.17：运算符</div>
+                </a>
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+            
+            
+            
+            <!-- utteranc评论 -->
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+            
+                <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+        new Valine({
+            el: '#comment',
+            notify:false,
+            verify:false,
+            appId: "KjbrfEG1B1XPM55idj4ZAMxj-gzGzoHsz",
+            appKey: "JYRqjtjp4kEGMoTa4ogAyWkt",
+            placeholder: "到妳說",
+            path:window.location.pathname,
+            avatar:'mm'
+        });
+    </script>
+
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    <!-- Mathjax -->
+</main>
+
+                <!-- profile -->
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+        <div class="social">
+                            <a href="mailto:diatipda1988@gmail.com" class="iconfont-archer email" title="email" ></a>
+                <a href="//github.com/xxxx-Li" class="iconfont-archer github" target="_blank" title="github"></a>
+                <span class="iconfont-archer wechat" title="wechat">
+                    <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+
+        </div>
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    <!-- 不蒜子  -->
+        <div class="busuanzi-container">
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+        </div>
+</footer>
+
+        </div>
+        <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-1-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.</span> <span class="toc-text">2.1.1 关系运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-2-%E5%85%B3%E7%B3%BB%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">2.1.2 关系表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-3-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.</span> <span class="toc-text">2.1.3 逻辑运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-4-%E9%80%BB%E8%BE%91%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">2.1.4 逻辑表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-5-%E7%9F%AD%E8%B7%AF%E6%B1%82%E5%80%BC"><span class="toc-number">5.</span> <span class="toc-text">2.1.5 短路求值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-6-if%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.</span> <span class="toc-text">2.1.6 if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%AC%AC%E4%B8%80%E7%A7%8D"><span class="toc-number">6.1.</span> <span class="toc-text">1.第一种</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D"><span class="toc-number">6.2.</span> <span class="toc-text">第二种</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%A7%8D"><span class="toc-number">6.3.</span> <span class="toc-text">第三种</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-7-switch-%E8%AF%AD%E5%8F%A5"><span class="toc-number">7.</span> <span class="toc-text">2.1.7 switch 语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-8-%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84%E7%9A%84%E5%B5%8C%E5%A5%97"><span class="toc-number">8.</span> <span class="toc-text">2.1.8 分支结构的嵌套</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-9-%E6%82%AC%E6%8C%82-else"><span class="toc-number">9.</span> <span class="toc-text">2.1.9  悬挂 else</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-10-%E7%AD%89%E4%BA%8E%E5%8F%B7%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">10.</span> <span class="toc-text">2.1.10 等于号带来的问题</span></a></li></ol>
+            </div>
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 20
+        </div>
+        <!-- search  -->
+    </div>
+    <div class="post-archive">
+            <div class="archive-year"> 2024 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span>
+            <a class="archive-post-title" href="/2024/01/18/C%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/">C的重要性</a>
+        </li>
+                </ul>
+            <div class="archive-year"> 2023 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span>
+            <a class="archive-post-title" href="/2023/12/16/%E9%83%9D%E6%96%8C-C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/%E9%83%9D%E6%96%8C-C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/">C语言笔记 大纲</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/14</span>
+            <a class="archive-post-title" href="/2023/09/14/%E9%AB%98%E6%95%B0/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-3%EF%BC%9A%E6%B1%82%E6%8A%BD%E8%B1%A1%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%9F%9F/">1.3：求抽象函数的定义域</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span>
+            <a class="archive-post-title" href="/2023/08/28/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2-1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/">2.1：分支结构</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/27</span>
+            <a class="archive-post-title" href="/2023/08/27/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/">1.17：运算符</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/24</span>
+            <a class="archive-post-title" href="/2023/08/24/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-16%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2/">1.16：字符串</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/23</span>
+            <a class="archive-post-title" href="/2023/08/23/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-15%EF%BC%9A%E5%AD%97%E7%AC%A6/">1.15：字符</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/19</span>
+            <a class="archive-post-title" href="/2023/08/19/%E9%AB%98%E6%95%B0/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-2%EF%BC%9A%E6%B1%82%E8%A7%A3%E5%85%B7%E4%BD%93%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E5%9F%9F/">1.2：求解具体函数定义域</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/19</span>
+            <a class="archive-post-title" href="/2023/08/19/%E9%AB%98%E6%95%B0/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-1%EF%BC%9A%E5%87%BD%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5/">1.1：函数的概念</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span>
+            <a class="archive-post-title" href="/2023/08/18/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-14%EF%BC%9A%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4/">1.14：取值范围</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span>
+            <a class="archive-post-title" href="/2023/08/18/%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9F%BA%E7%A1%80/">算法之基础</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span>
+            <a class="archive-post-title" href="/2023/08/17/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E5%8D%95JS%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8JS%E4%BB%A3%E7%A0%81/">网易云音乐歌单JS音乐播放器JS代码</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/07</span>
+            <a class="archive-post-title" href="/2023/08/07/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-13%EF%BC%9Asigned%E5%92%8Cunsigned/">1.13：signed和unsigned</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/06</span>
+            <a class="archive-post-title" href="/2023/08/06/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-12%EF%BC%9Asizeof%E8%BF%90%E7%AE%97%E7%AC%A6/">1.12：sizeof运算符</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/05</span>
+            <a class="archive-post-title" href="/2023/08/05/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-11%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">1.11：数据类型</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/04</span>
+            <a class="archive-post-title" href="/2023/08/04/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-10%EF%BC%9A%E5%B8%B8%E9%87%8F/">1-10：常量</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span>
+            <a class="archive-post-title" href="/2023/08/03/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-9%EF%BC%9A%E5%8F%98%E9%87%8F/">1.9：变量</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/02</span>
+            <a class="archive-post-title" href="/2023/08/02/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-8%EF%BC%9A%E6%89%93%E5%8D%B0/">1-8：打印</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/01</span>
+            <a class="archive-post-title" href="/2023/08/01/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-7%EF%BC%9A%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/">1.7:第一个程序</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span>
+            <a class="archive-post-title" href="/2023/07/31/hello-world/">Hello World</a>
+        </li>
+            </ul>
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="基础">
+                <span class="iconfont-archer">&#xe606;</span>
+                基础
+            </span>
+            <span class="sidebar-tag-name" data-tags="Big O">
+                <span class="iconfont-archer">&#xe606;</span>
+                Big O
+            </span>
+            <span class="sidebar-tag-name" data-tags="音乐播放器">
+                <span class="iconfont-archer">&#xe606;</span>
+                音乐播放器
+            </span>
+            <span class="sidebar-tag-name" data-tags="JavaScript">
+                <span class="iconfont-archer">&#xe606;</span>
+                JavaScript
+            </span>
+            <span class="sidebar-tag-name" data-tags="C">
+                <span class="iconfont-archer">&#xe606;</span>
+                C
+            </span>
+            <span class="sidebar-tag-name" data-tags="C#">
+                <span class="iconfont-archer">&#xe606;</span>
+                C#
+            </span>
+            <span class="sidebar-tag-name" data-tags="高数">
+                <span class="iconfont-archer">&#xe606;</span>
+                高数
+            </span>
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+        <span class="sidebar-category-name" data-categories="数据结构与算法">
+            <span class="iconfont-archer">&#xe60a;</span>
+            数据结构与算法
+        </span>
+        <span class="sidebar-category-name" data-categories="Blog">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Blog
+        </span>
+        <span class="sidebar-category-name" data-categories="C语言">
+            <span class="iconfont-archer">&#xe60a;</span>
+            C语言
+        </span>
+        <span class="sidebar-category-name" data-categories="Plugin">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Plugin
+        </span>
+        <span class="sidebar-category-name" data-categories="高数">
+            <span class="iconfont-archer">&#xe60a;</span>
+            高数
+        </span>
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://example.com",
+        root: siteMetaRoot,
+        author: "譯鋒"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+        <!-- main func -->
+        <script src="/scripts/main.js"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" onload="window.Fancybox.bind('[data-fancybox]')" defer></script>
+        <!-- algolia -->
+        <!-- busuanzi -->
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        <!-- async load share.js -->
+            <script src="/scripts/share.js" async></script>
+        <!-- mermaid -->
+    </body>
+</html>

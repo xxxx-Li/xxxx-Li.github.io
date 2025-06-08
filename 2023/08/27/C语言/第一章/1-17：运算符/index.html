@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+<!-- keywords -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="譯鋒">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="譯鋒">
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    <meta name="description" content="">
+    <meta name="description" content="几乎每一个有意义的程序都需要进行计算，写代码设计程序，就是为了告诉计算机如何对数据进行加工处理，最后得出想要的结果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.17：运算符">
+<meta property="og:url" content="http://example.com/2023/08/27/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
+<meta property="og:site_name" content="譯鋒說">
+<meta property="og:description" content="几乎每一个有意义的程序都需要进行计算，写代码设计程序，就是为了告诉计算机如何对数据进行加工处理，最后得出想要的结果。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/1.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/2.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/3.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/4.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/5.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/6.png">
+<meta property="og:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/7.png">
+<meta property="article:published_time" content="2023-08-27T03:50:00.000Z">
+<meta property="article:modified_time" content="2023-08-27T03:50:00.000Z">
+<meta property="article:author" content="譯鋒">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/1.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    <title>1.17：运算符 · 譯鋒說</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .footer-fixed-btn,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #444 0,
+            #444 80px,
+            #333 80px,
+            #333 160px
+        );
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link id="stylesheet-fancybox" rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-base" rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-mobile" rel="preload" href="/css/mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='screen and (max-width: 960px)'">
+    <link id="stylesheet-theme-dark" rel="preload" href="/css/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    <!-- 百度统计  -->
+    <!-- 谷歌统计  -->
+    <!-- Google tag (gtag.js) -->
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="譯鋒說" type="application/atom+xml">
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+        <body class="post-body">
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        <div class="header-sidebar-menu">
+            <div style="padding-left: 1px;">&#xe775;</div>
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href="/">譯鋒說</a>
+        </span>
+    </div>
+    <!-- toggle banner -->
+    <div class="banner">
+        <div class="blog-title header-element">
+            <a href="/">譯鋒說</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">1.17：运算符</a>
+        </div>
+    </div>
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- donate button -->
+
+    <!-- back to top button -->
+    <div class="footer-fixed-btn footer-fixed-btn--hidden back-top">
+        <div>&#xe639;</div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="    height:50vh;
+">
+    <!-- 主页  -->
+    <!-- 404页  -->
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+                1.17：运算符
+            <!-- 404 -->
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            <!-- 404 -->
+        </p>
+        <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="C#">C#</a>
+</div>
+
+                <!-- 文章字数统计 -->
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.8k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
+                    </div>
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2023/08/27</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>几乎每一个有意义的程序都需要进行计算，写代码设计程序，就是为了告诉计算机如何对数据进行加工处理，最后得出想要的结果。</p>
+<span id="more"></span>
+
+<hr>
+<p>&ensp;&emsp;几乎每一个有意义的程序都需要进行计算，写代码设计程序，就是为了告诉计算机如何对数据进行加工处理，最后得出想要的结果。<br>&ensp;&emsp;C语言通过提供大量的运算符来支持我们对数据进行处理<br>&ensp;&emsp;前边将一个值存放到变量中，使用的是赋值运算符，就是<b><span style="color:#f0768b;">等号（&#x3D;）</span></b>。<br>&ensp;&emsp;对字符串中的某个字符进行索引，则是将<b><span style="color:#f0768b;">方括号（[]）</span></b>作为下标运算符来实现。 </p>
+<h2 id="1-17-1-算术运算符"><a href="#1-17-1-算术运算符" class="headerlink" title="1.17.1 算术运算符"></a>1.17.1 算术运算符</h2><p>&ensp;&emsp;C语言支持的算术运算符见表1-6<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/1.png"></p>
+<p>&ensp;&emsp;这里有以下几点需要注意：</p>
+<ul>
+<li>因为键盘上没有乘号和除号两个按键，所以用<b><span style="color:#f0768b;">星号（*）</span></b>和<b><span style="color:#f0768b;">斜杠（&#x2F;）</span></b>代替</li>
+<li>对于整数间的除法采取<b><span style="color:#f0768b;">直接舍弃小数部分</span></b>的方式，而不是四舍五入</li>
+<li>对于浮点数间的除法则能获得一个相对逼近结果的值（如果除不尽或位数特别多的话）</li>
+<li>百分号（%）表示求余数的意思，但求余运算符要求两边的操作数都要是整数，其结果也是整数</li>
+</ul>
+<h2 id="1-17-2-目"><a href="#1-17-2-目" class="headerlink" title="1.17.2 目"></a>1.17.2 目</h2><p>&ensp;&emsp;表1-6中有些运算符后边写“双目”，有些写“单目”，那么“目”的意思是什么？<br>&ensp;&emsp;我们把<b><span style="color:#a70e85;">被运算符作用的运算对象成为操作数</span></b>，如<code>1+2</code>，那么1和2就是<b><span style="color:#f0768b;">被加法运算符（+）作用的两个操作数</span></b><br><b><span style="color:#a70e85;">一个运算符是双目运算符还是单目运算符，就看它有多少个操作数。</span></b>加号（+）作为加法运算符使用的时候，它有两个操作数，称为双目运算符；但是，表示正号（+）的时候，他只有一个操作数，称为单目运算符</p>
+<p>&ensp;&emsp;C语言除了单目运算符、双目运算符，还有唯一的一个三目运算符，就是有三个操作数（后面有说）</p>
+<h2 id="1-17-3-表达式"><a href="#1-17-3-表达式" class="headerlink" title="1.17.3 表达式"></a>1.17.3 表达式</h2><p>&ensp;&emsp;用运算符和括号将操作数连接起来的式子，称为<b><span style="color:#f0768b;">表达式</span></b>，下面是几个表达式的例子：</p>
+<ol>
+<li><code>1+1</code> </li>
+<li><code>&#39;a&#39;+&#39;b&#39;</code> </li>
+<li><code>a+b</code> </li>
+<li><code>a+&#39;b&#39;+pow(a,b)*3/4+5</code></li>
+</ol>
+<p>&ensp;&emsp;表达式可以很简单（像<code>1+1</code>），也可以很复杂（像<code>a+&#39;b&#39;+pow(a,b)*3/4+5</code>）。那么涉及复杂的表达式，就需要讨论计算的先后顺序。<br>&ensp;&emsp;对于算术运算符构成的表达式，只需要用到小学的数学知识就足够了——<b><span style="color:#f0768b;">先乘除，后加减</span></b>。但<b><span style="color:#a70e85;">如果一个表达式内，存在多种不同的运算符，就需要考虑到运算符的优先级和结合性的问题</span></b>。</p>
+<h2 id="1-17-4-运算符的优先级和结合性"><a href="#1-17-4-运算符的优先级和结合性" class="headerlink" title="1.17.4 运算符的优先级和结合性"></a>1.17.4 运算符的优先级和结合性</h2><p>&ensp;&emsp;表1-7列举了C语言所有运算符的优先级和结合性。<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/2.png"></p>
+<p><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/3.png"></p>
+<p>优先级和结合性共同决定了在同一表达式中运算的先后顺序</p>
+<p>&ensp;&emsp;表1-7中优先级的数字越小，说明其优先级越高。表示正、负号运算符的优先级要高于加、减、乘、除和求余运算符，赋值运算符的优先级则要低于算术运算符。 <br><br>&ensp;&emsp;请看下面例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> i, j, k;</span><br><span class="line"></span><br><span class="line">        i = <span class="number">1</span> + <span class="number">2</span>;</span><br><span class="line">        j = <span class="number">1</span> + <span class="number">2</span> * <span class="number">3</span>;</span><br><span class="line">        k = i +j + <span class="number">-1</span> + <span class="built_in">pow</span>(<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i = %d\n&quot;</span>, i);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;j = %d\n&quot;</span>, j);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;k = %d\n&quot;</span>, k);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/4.png"></p>
+<p>&ensp;&emsp;代码分析：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">1</span> + <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;这是一个完整的语句，用分号（<code>；</code>）表示语句结束。<br>&ensp;&emsp;其中有两个运算符，分别是赋值运算符（&#x3D;）和加号运算符（+）<br>&ensp;&emsp;由于赋值运算符的优先级要比算术运算符低，因此先将1和2两个操作数相加，再将其结果赋值给变量<code>i</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">j = <span class="number">1</span> + <span class="number">2</span> * <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;同样道理，<b><span style="color:#f0768b;">乘号运算符（*）</span></b>的优先级高于<b><span style="color:#f0768b;">加号运算符（+）</span></b>，于是先计算<code>2*3</code>的值，再与1相加，最后才赋值给变量<code>j</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k = i +j + <span class="number">-1</span> + <span class="built_in">pow</span>(<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;经过上面两个语句的计算，变量i和j的值是3和7；负号运算符的优先级大于加号运算符，并且结合性是“右向左”，所以得到的值是<code>-1</code>；</p>
+<p>&ensp;&emsp;最后还有一个函数，<b><span style="color:#a70e85;">函数的作用就是帮我们实现一个功能</span></b>，如<code>printf</code>函数用于打印格式化字符串而这里<code>pow</code>函数则是计算2的3次方，然后将结果返回。这里可以直接将<code>pow(2,3)</code>看成是它返回的结果，也就是8<br>&ensp;&emsp;所以整个表达式就是<code>k=3+7+(-1)+8</code>，这就变成了由3个加号运算符和4个操作数组成的表达式。<br>&ensp;&emsp;算术运算符的结合性都是“左向右”，因此先计算<code>3+7</code>的和，再加上<code>-1</code>，最后加上<code>8</code>，结果是<code>17</code></p>
+<h2 id="1-17-5-类型转换"><a href="#1-17-5-类型转换" class="headerlink" title="1.17.5 类型转换"></a>1.17.5 类型转换</h2><p>&ensp;&emsp;当一个运算符的几个操作数类型不同时，编译器需要将它们转换为相同的数据类型才能进行运算。通常情况下，编译器会将占用“坑位”较小的操作数转换为占用“坑位”较大的操作数的数据类型，再进行运算（这样做是为了确保计算的精确度<br>&ensp;&emsp;当遇到类似<code>1+2.0</code>这种两种不同数据类型的操作数运算时，编译器首先将<code>1</code>转换为浮点型<code>1.0</code>，然后再与<code>2.0</code>相加，得到同样为浮点型的结果<code>3.0</code><br>&ensp;&emsp;如下例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;整型输出：%d\n&quot;</span>, <span class="number">1</span> + <span class="number">2.0</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;浮点型输出：%f\n&quot;</span>, <span class="number">1</span> + <span class="number">2.0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/5.png"></p>
+<p>&ensp;&emsp;如果以<code>%d</code>整型的格式打印，那么输出结果是<code>0</code>，这是由于<code>printf</code>指定了错误的输出格式导致的，而用<code>%f</code>可以正确的打印出结果<code>3.0</code> <br><br>&ensp;&emsp;除了编译器帮助自动转换不同类型的操作数之外，C语言还允许强制转换操作数的数据类型。做法就是在操作数的前面用小括号将目标数据类型括起来，代码修改如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">……</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;整型输出：%d\n&quot;</span>, <span class="number">1</span> + (<span class="type">int</span>)<span class="number">2.0</span>);</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>&ensp;&emsp;现在就可以使用<code>%d</code>打印计算结果了，程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/6.png"></p>
+<p>再有一种情况，如果待转换的操作数是<code>1.8</code>，那么转换后的结果应该如何<br>将代码修改如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">……</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;整型输出：%d\n&quot;</span>, <span class="number">1</span> + (<span class="type">int</span>)<span class="number">1.8</span>);</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>程序实现如下：<br><img src="/image/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/7.png"></p>
+<p>结果并不是“四舍五入”，因为<b><span style="color:#a70e85;">C语言的做法是直接去掉小数部分的值</span></b>。</p>
+
+    </article>
+    <!-- license -->
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://example.com">譯鋒</a>
+            <p>原文链接：<a href="http://example.com/2023/08/27/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/">http://example.com/2023/08/27/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/</a>
+            <p>发表日期：<a href="http://example.com/2023/08/27/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/">August 27th 2023, 11:50:00 am</a>
+            <p>更新日期：<a href="http://example.com/2023/08/27/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/">August 27th 2023, 11:50:00 am</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2023/08/28/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2-1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/" title="2.1：分支结构">
+                    <div class="nextTitle">2.1：分支结构</div>
+                </a>
+        </li>
+        <li class="previous">
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2023/08/24/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-16%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="1.16：字符串">
+                    <div class="prevTitle">1.16：字符串</div>
+                </a>
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+            
+            
+            
+            <!-- utteranc评论 -->
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+            
+                <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+        new Valine({
+            el: '#comment',
+            notify:false,
+            verify:false,
+            appId: "KjbrfEG1B1XPM55idj4ZAMxj-gzGzoHsz",
+            appKey: "JYRqjtjp4kEGMoTa4ogAyWkt",
+            placeholder: "到妳說",
+            path:window.location.pathname,
+            avatar:'mm'
+        });
+    </script>
+
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    <!-- Mathjax -->
+</main>
+
+                <!-- profile -->
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+        <div class="social">
+                            <a href="mailto:diatipda1988@gmail.com" class="iconfont-archer email" title="email" ></a>
+                <a href="//github.com/xxxx-Li" class="iconfont-archer github" target="_blank" title="github"></a>
+                <span class="iconfont-archer wechat" title="wechat">
+                    <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+
+        </div>
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    <!-- 不蒜子  -->
+        <div class="busuanzi-container">
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+        </div>
+</footer>
+
+        </div>
+        <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-17-1-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.</span> <span class="toc-text">1.17.1 算术运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-17-2-%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">1.17.2 目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-17-3-%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">1.17.3 表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-17-4-%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E7%BB%93%E5%90%88%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">1.17.4 运算符的优先级和结合性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-17-5-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">5.</span> <span class="toc-text">1.17.5 类型转换</span></a></li></ol>
+            </div>
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 20
+        </div>
+        <!-- search  -->
+    </div>
+    <div class="post-archive">
+            <div class="archive-year"> 2024 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span>
+            <a class="archive-post-title" href="/2024/01/18/C%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/">C的重要性</a>
+        </li>
+                </ul>
+            <div class="archive-year"> 2023 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span>
+            <a class="archive-post-title" href="/2023/12/16/%E9%83%9D%E6%96%8C-C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/%E9%83%9D%E6%96%8C-C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/">C语言笔记 大纲</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/14</span>
+            <a class="archive-post-title" href="/2023/09/14/%E9%AB%98%E6%95%B0/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-3%EF%BC%9A%E6%B1%82%E6%8A%BD%E8%B1%A1%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%9F%9F/">1.3：求抽象函数的定义域</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span>
+            <a class="archive-post-title" href="/2023/08/28/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%BA%8C%E7%AB%A0/2-1%EF%BC%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/">2.1：分支结构</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/27</span>
+            <a class="archive-post-title" href="/2023/08/27/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-17%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6/">1.17：运算符</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/24</span>
+            <a class="archive-post-title" href="/2023/08/24/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-16%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2/">1.16：字符串</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/23</span>
+            <a class="archive-post-title" href="/2023/08/23/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-15%EF%BC%9A%E5%AD%97%E7%AC%A6/">1.15：字符</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/19</span>
+            <a class="archive-post-title" href="/2023/08/19/%E9%AB%98%E6%95%B0/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-2%EF%BC%9A%E6%B1%82%E8%A7%A3%E5%85%B7%E4%BD%93%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E5%9F%9F/">1.2：求解具体函数定义域</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/19</span>
+            <a class="archive-post-title" href="/2023/08/19/%E9%AB%98%E6%95%B0/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-1%EF%BC%9A%E5%87%BD%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5/">1.1：函数的概念</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span>
+            <a class="archive-post-title" href="/2023/08/18/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-14%EF%BC%9A%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4/">1.14：取值范围</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span>
+            <a class="archive-post-title" href="/2023/08/18/%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9F%BA%E7%A1%80/">算法之基础</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span>
+            <a class="archive-post-title" href="/2023/08/17/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E5%8D%95JS%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8JS%E4%BB%A3%E7%A0%81/">网易云音乐歌单JS音乐播放器JS代码</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/07</span>
+            <a class="archive-post-title" href="/2023/08/07/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-13%EF%BC%9Asigned%E5%92%8Cunsigned/">1.13：signed和unsigned</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/06</span>
+            <a class="archive-post-title" href="/2023/08/06/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-12%EF%BC%9Asizeof%E8%BF%90%E7%AE%97%E7%AC%A6/">1.12：sizeof运算符</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/05</span>
+            <a class="archive-post-title" href="/2023/08/05/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-11%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">1.11：数据类型</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/04</span>
+            <a class="archive-post-title" href="/2023/08/04/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-10%EF%BC%9A%E5%B8%B8%E9%87%8F/">1-10：常量</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span>
+            <a class="archive-post-title" href="/2023/08/03/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-9%EF%BC%9A%E5%8F%98%E9%87%8F/">1.9：变量</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/02</span>
+            <a class="archive-post-title" href="/2023/08/02/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-8%EF%BC%9A%E6%89%93%E5%8D%B0/">1-8：打印</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/01</span>
+            <a class="archive-post-title" href="/2023/08/01/C%E8%AF%AD%E8%A8%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/1-7%EF%BC%9A%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/">1.7:第一个程序</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span>
+            <a class="archive-post-title" href="/2023/07/31/hello-world/">Hello World</a>
+        </li>
+            </ul>
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="基础">
+                <span class="iconfont-archer">&#xe606;</span>
+                基础
+            </span>
+            <span class="sidebar-tag-name" data-tags="Big O">
+                <span class="iconfont-archer">&#xe606;</span>
+                Big O
+            </span>
+            <span class="sidebar-tag-name" data-tags="音乐播放器">
+                <span class="iconfont-archer">&#xe606;</span>
+                音乐播放器
+            </span>
+            <span class="sidebar-tag-name" data-tags="JavaScript">
+                <span class="iconfont-archer">&#xe606;</span>
+                JavaScript
+            </span>
+            <span class="sidebar-tag-name" data-tags="C">
+                <span class="iconfont-archer">&#xe606;</span>
+                C
+            </span>
+            <span class="sidebar-tag-name" data-tags="C#">
+                <span class="iconfont-archer">&#xe606;</span>
+                C#
+            </span>
+            <span class="sidebar-tag-name" data-tags="高数">
+                <span class="iconfont-archer">&#xe606;</span>
+                高数
+            </span>
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+        <span class="sidebar-category-name" data-categories="数据结构与算法">
+            <span class="iconfont-archer">&#xe60a;</span>
+            数据结构与算法
+        </span>
+        <span class="sidebar-category-name" data-categories="Blog">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Blog
+        </span>
+        <span class="sidebar-category-name" data-categories="C语言">
+            <span class="iconfont-archer">&#xe60a;</span>
+            C语言
+        </span>
+        <span class="sidebar-category-name" data-categories="Plugin">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Plugin
+        </span>
+        <span class="sidebar-category-name" data-categories="高数">
+            <span class="iconfont-archer">&#xe60a;</span>
+            高数
+        </span>
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://example.com",
+        root: siteMetaRoot,
+        author: "譯鋒"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+        <!-- main func -->
+        <script src="/scripts/main.js"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" onload="window.Fancybox.bind('[data-fancybox]')" defer></script>
+        <!-- algolia -->
+        <!-- busuanzi -->
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        <!-- async load share.js -->
+            <script src="/scripts/share.js" async></script>
+        <!-- mermaid -->
+    </body>
+</html>
